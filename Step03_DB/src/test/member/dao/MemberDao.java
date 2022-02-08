@@ -1,4 +1,4 @@
- package test.member.dao;
+package test.member.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,42 +26,110 @@ public class MemberDao {
    }
    
    public boolean insert(MemberDto dto) {
-	   Connection conn=null;
-	      PreparedStatement pstmt=null;
-	      int flag=0;
-	      try {
-	         conn=new DbcpBean().getConn();
-	         //실행할 sql 문 준비하기
-	         String sql="INSERT INTO member"
-	        		 + " (num,name,addr)"
-	        		 + " VALUES(member_seq.NEXTVAL, ?, ?)";
-	         pstmt=conn.prepareStatement(sql);
-	         //? 에 값 바인딩하기
-	         
-	         //sql 문 수행하고 변화된 row 의 갯수 리턴 받기
-	         flag=pstmt.executeUpdate();
-	      }catch(Exception e) {
-	         e.printStackTrace();
-	      }finally {
-	         try {
-	            if(pstmt!=null)pstmt.close();
-	            if(conn!=null)conn.close();
-	         }catch(Exception e) {}
-	      }
-	      if(flag>0) {
-	         return true;
-	      }else {
-	         return false;
-	      }
+      Connection conn = null;
+      PreparedStatement pstmt = null;
+      int flag = 0;
+      try {
+         conn = new DbcpBean().getConn();
+         //실행할 sql 문 준비하기
+         String sql = "INSERT INTO member"
+               + " (num,name,addr)"
+               + " VALUES(member_seq.NEXTVAL, ?, ?)";
+         pstmt = conn.prepareStatement(sql);
+         //? 에 값 바인딩하기
+         pstmt.setString(1, dto.getName());
+         pstmt.setString(2, dto.getAddr());
+         //sql 문 수행하고 변화된 row 의 갯수 리턴 받기
+         flag = pstmt.executeUpdate();
+      } catch (Exception e) {
+         e.printStackTrace();
+      } finally {
+         try {
+            if (pstmt != null)
+               pstmt.close();
+            if (conn != null)
+               conn.close();
+         } catch (Exception e) {
+         }
+      }
+      if (flag > 0) {
+         return true;
+      } else {
+         return false;
+      }
    }
    public boolean update(MemberDto dto) {
       return false;
    }
    public boolean delete(int num) {
-      return false;
+      Connection conn = null;
+      PreparedStatement pstmt = null;
+      int flag = 0;
+      try {
+         conn = new DbcpBean().getConn();
+         //실행할 sql 문 준비하기
+         String sql = "DELETE FROM member"
+               + " WHERE num=?";
+         pstmt = conn.prepareStatement(sql);
+         //? 에 값 바인딩하기
+         pstmt.setInt(1, num);
+         //sql 문 수행하고 변화된 row 의 갯수 리턴 받기
+         flag = pstmt.executeUpdate();
+      } catch (Exception e) {
+         e.printStackTrace();
+      } finally {
+         try {
+            if (pstmt != null)
+               pstmt.close();
+            if (conn != null)
+               conn.close();
+         } catch (Exception e) {
+         }
+      }
+      if (flag > 0) {
+         return true;
+      } else {
+         return false;
+      }
    }
    public MemberDto select(int num) {
-      return null;
+      MemberDto dto=null;
+      
+      Connection conn = null;
+      PreparedStatement pstmt = null;
+      ResultSet rs = null;
+      try {
+         //Connection 객체의 참조값 얻어오기 
+         conn = new DbcpBean().getConn();
+         //실행할 sql 문 준비
+         String sql = "SELECT name, addr"
+               + " FROM member"
+               + " WHERE num=?";
+         pstmt = conn.prepareStatement(sql);
+         //? 에 값 바인딩하기
+         pstmt.setInt(1, num);
+         //query 문 수행하고 결과 받아오기 
+         rs = pstmt.executeQuery();
+         if (rs.next()) {
+            dto=new MemberDto();
+            dto.setNum(num);
+            dto.setName(rs.getString("name"));
+            dto.setAddr(rs.getString("addr"));
+         }
+      } catch (Exception e) {
+         e.printStackTrace();
+      } finally {
+         try {
+            if (rs != null)
+               rs.close();
+            if (pstmt != null)
+               pstmt.close();
+            if (conn != null)
+               conn.close();
+         } catch (Exception e) {
+         }
+      }
+      return dto;
    }
    public List<MemberDto> selectAll(){
       List<MemberDto> list=new ArrayList<MemberDto>();
@@ -106,3 +174,12 @@ public class MemberDao {
       return list;
    }
 }
+
+
+
+
+
+
+
+
+
