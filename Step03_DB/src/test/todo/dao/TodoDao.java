@@ -26,7 +26,7 @@ public class TodoDao {
 			conn = new DbcpBean().getConn();
 			String sql ="INSERT INTO todo" 
 					+ " (num,content,regdate)"
-					+ " VALUES(todo_seq.NEXTVAL,?,?)";
+					+ " VALUES(todo_seq.NEXTVAL,?, TO_DATE(?, 'YYYY-MM-DD HH24:MI'))";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getContent());
 			pstmt.setString(2, dto.getRegdate());
@@ -151,7 +151,7 @@ public class TodoDao {
 		ResultSet rs=null;
 		try {
 			conn = new DbcpBean().getConn();
-			String sql="SELECT num,content,regdate"
+			String sql="SELECT num,content, TO_CHAR(regdate,'YY\"년\" MM\"월\"DD\"일\"') AS regdate"
 					+" FROM todo"
 					+" ORDER BY num ASC";
 			pstmt=conn.prepareStatement(sql);
