@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+	String nick=(String)session.getAttribute("nick");
+%>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>/test/play.jsp</title>
+</head>
+<body>
+	<h1>play.jsp 페이지 입니다.</h1>
+	<%if(nick==null){ %>
+		<p>session 영역에 "nick" 이라는 키값으로 저장된 값이 없습니다!</p>
+	<%}else{ %>
+		<p>
+			<strong><%=nick %></strong> 님 놀러 오셨네요? 이제 집에가요.
+			<a href="delete.jsp">세션에 저장된 내용 삭제하기(로그아웃)</a>
+		</p>
+	<%} %>
+</body>
+</html>
