@@ -22,7 +22,15 @@
 	<ul>
 		<li><a href="users/signup_form.jsp">회원가입</a></li>
 		<li><a href="users/loginform.jsp">로그인</a></li>
+		<li><a href="private/study.jsp">회원전용공간(공부)</a></li>
+		<li><a href="private/game.jsp">회원전용공간(게임)</a></li>
 	</ul>
 </div>
 </body>
 </html>
+
+
+
+
+
+
