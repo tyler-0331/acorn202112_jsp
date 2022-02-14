@@ -2,6 +2,7 @@ package test.users.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import test.users.dto.UsersDto;
 import test.util.DbcpBean;
@@ -17,6 +18,46 @@ public class UsersDao {
 		}
 		return dao;
 	}
+	
+	//인자로 전달되는 dto 에 있는 id, pwd 가 유효한 정보인지 여부를 리턴해 주는 메소드
+	public boolean isValid(UsersDto dto) {
+		//맞는 정보인지 여부를 담을 지역 변수를 선언하고 초기값 false 넣어주기 
+		boolean isValid=false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기 
+			conn = new DbcpBean().getConn();
+			//실행할 sql 문 준비
+			String sql = "SELECT *"
+					+ " FROM users"
+					+ " WHERE id=? AND pwd=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 에 값 바인딩하기
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPwd());
+			//query 문 수행하고 결과 받아오기 
+			rs = pstmt.executeQuery();
+			if (rs.next()) { //만일 select 된 row 가 있으면
+				isValid=true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}
+		return isValid;
+	}
+	
 	//회원 정보를 저장하는 메소드
 	public boolean insert(UsersDto dto) {
 		Connection conn = null;
