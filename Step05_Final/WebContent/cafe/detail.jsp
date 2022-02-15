@@ -34,6 +34,7 @@
 			<li class="breadcrumb-item active">상세보기</li>
 		</ul>
 	</nav>	
+	
 	<table class="table table-bordered">
 		<tr>
 			<th>글번호</th>
@@ -61,6 +62,15 @@
 			</td>
 		</tr>
 	</table>
+	
+	<%if(dto.getPrevNum() != 0){%>
+		<a href="detail.jsp?num=<%=dto.getPrevNum()%>">이전글</a>
+	<%}%>
+	<%if(dto.getNextNum() != 0){ %>
+		<a href="detail.jsp?num=<%=dto.getNextNum()%>">다음글</a>
+	<%} %>
+	
+	
 	<%
 		//session scope 에서 로그인된 아이디를 읽어와 본다. ( null 일수도 있음 )
 		String id=(String)session.getAttribute("id");
