@@ -9,8 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>/index.jsp</title>
+<jsp:include page="/include/resource.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="/include/navbar.jsp"></jsp:include>
 <div class="container">
 	<%if(id != null){ %>
 		<p>
