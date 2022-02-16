@@ -65,3 +65,13 @@
 	//FileInputStream 닫아주기 
 	fis.close();	
 %>    
+
+
+
+
+
+
+
+
+
+
