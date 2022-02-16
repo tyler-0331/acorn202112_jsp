@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *   1.javax.servlet.Filter 인터페이스를 구현한다.
  *   2. 어떤 요청에 대한 필터링을 할것인지 맵핑한다.
  * */
-@WebFilter({"/private/*","/users/private/"})
+@WebFilter({"/private/*","/users/private/*","/cafe/private/*","/file/private/*","/gallery/private/*"})
 public class LoginFilter implements Filter {
 
    @Override
@@ -43,7 +43,7 @@ public class LoginFilter implements Filter {
          if(id != null) {
             //2. 만일 로그인을 했으면 관여하지 않고 요청의 흐름을 이어간다.
             chain.doFilter(request, response);
-         }else {
+         }else { 
             /*
              *  로그인 페이지로 강제 리다일렉트 됬다면 
              *  로그인 성공후에 원래 가려던 목적지로 다시 보내야 하고

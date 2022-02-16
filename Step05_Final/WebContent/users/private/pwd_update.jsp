@@ -14,8 +14,6 @@
    dto.setId(id);
    dto.setPwd(pwd);
    dto.setNewPwd(newPwd);
-   boolean isSuccess = UsersDao.getInstance().updatePwd(dto);
-   
    
    /*
       위의 정보를 이용해서 DB 를 업데이트하는 UsersDao 에 메소드를 만들어 보세요.
@@ -26,6 +24,10 @@
       
       실패이면  비밀번호가 일치하지 않는다는 메세지를 띄우고 다시 비밀번호 수정폼으로 이동할수 있도록 해 보세요.
    */
+   boolean isSuccess=UsersDao.getInstance().updatePwd(dto);
+   if(isSuccess){ //만일 성공이면 
+      session.removeAttribute("id");
+   }
 %>    
 <!DOCTYPE html>
 <html>
@@ -34,19 +36,19 @@
 <title>/users/private/pwd_update.jsp</title>
 </head>
 <body>
-<h1>비밀번호 변경이 성공적으로 되었습니다!</h1>
-	<%if(isSuccess){ %>
-		<p>
-         <strong><%=id %></strong> 님의 비밀번호가 주정 되었습니다.
-         <a href="${pageContext.request.contextPath }/users/logout.jsp">다시 로그인하기</a>
-     	</p>
-	<%}else{ %>
-		<p>
-         <strong><%=id %></strong> 님 비밀번호가 일치 하지 않습니다.
-         <a href="${pageContext.request.contextPath }/users/private/pwd_updateform.jsp">다시 로그인하기</a>
-     	</p>
-	<%} %>
-
+<div class="container">
+   <%if(isSuccess){ %>
+      <p>
+         비밀 번호를 수정하고 로그 아웃되었습니다.
+         <a href="${pageContext.request.contextPath }/users/loginform.jsp">다시 로그인</a>
+      </p>
+   <%}else{ %>
+      <p>
+         구 비밀번호가 일치하지 않습니다.
+         <a href="${pageContext.request.contextPath }/users/private/pwd_updateform.jsp">다시 시도</a>
+      </p>
+   <%} %>
+</div>
 </body>
 </html>
 
