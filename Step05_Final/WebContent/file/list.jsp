@@ -1,4 +1,4 @@
-2<%@page import="java.net.URLEncoder"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="test.file.dto.FileDto"%>
 <%@page import="test.file.dao.FileDao"%>
 <%@page import="java.util.List"%>
