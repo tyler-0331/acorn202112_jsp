@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *  2. 어떤 요청에 대해 필터링을 할것인지 맵핑한다.
  */
 
-@WebFilter({"/private/*","/users/private/*","/cafe/private/*","/file/private/*"})
+@WebFilter({"/private/*","/users/private/*","/cafe/private/*","/file/private/*","/gallery/private/*"})
 public class LoginFilter implements Filter{
 
 	@Override
