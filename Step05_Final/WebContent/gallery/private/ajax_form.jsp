@@ -36,7 +36,7 @@
 		//util 함수를 이용해서 ajax 전송
 		ajaxFormPromise(form)
 		.then(function(response){
-			return response.json();
+			return response.json();//Promise 객체
 		})
 		.then(function(data){
 			//data 는  {imagePath:"업로드된 이미지 경로"}

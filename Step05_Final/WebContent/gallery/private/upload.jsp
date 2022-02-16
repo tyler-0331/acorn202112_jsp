@@ -46,4 +46,16 @@
 	//목록 보기로 리다일렉트 이동  응답
 	String cPath=request.getContextPath();
 	response.sendRedirect(cPath+"/gallery/list.jsp");
-%>    
+%>   
+
+
+
+
+
+
+
+
+
+
+
+ 
