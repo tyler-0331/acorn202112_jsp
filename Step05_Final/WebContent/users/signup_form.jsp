@@ -19,6 +19,11 @@
 		<div class="mb-3">
 			<label class="control-label" for="pwd">비밀번호</label>
 			<input class="form-control" type="password" name="pwd" id="pwd"/>
+			<div class="invalid-feedback">비밀 번호를 확인 하세요</div>
+		</div>
+		<div class="mb-3">
+			<label class="control-label" for="pwd2">비밀번호 확인</label>
+			<input class="form-control" type="password" name="pwd2" id="pwd2"/>
 		</div>
 		<div class="mb-3">
 			<label class="control-label" for="email">이메일</label>
@@ -52,6 +57,25 @@
 		});
 		
 	});
+	
+	//비밀번호를 확인 하는 함수 
+	function checkPwd(){
+		document.querySelector("#pwd").classList.remove("is-valid");
+		document.querySelector("#pwd").classList.remove("is-invalid");
+		
+		const pwd=document.querySelector("#pwd").value;
+		const pwd2=document.querySelector("#pwd2").value;
+		
+		if(pwd != pwd2){//만일 비밀번호 입력란과 확인란이 다르다면
+			document.querySelector("#pwd").classList.add("is-invalid");
+		}else{
+			document.querySelector("#pwd").classList.add("is-valid");
+		}
+	}
+	
+	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
+	document.querySelector("#pwd").addEventListener("input", checkPwd);
+	document.querySelector("#pwd2").addEventListener("input", checkPwd);	
 </script>
 </body>
 </html>
