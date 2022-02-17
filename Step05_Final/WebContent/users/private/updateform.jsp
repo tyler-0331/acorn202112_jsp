@@ -81,8 +81,18 @@
 		.then(function(data){
 			// data 는 {imagePath:"/upload/xxx.jpg"} 형식의 object 이다.
 			console.log(data);
-			let img=`<img id="profileImage" src="<%=request.getContextPath()%>\${data.imagePath}"/>`;
+			let img=`<img id="profileImage" src="${pageContext.request.contextPath }\${data.imagePath}"/>`;
 			document.querySelector("#profileLink").innerHTML=img;
+			
+			/* 아래의 방법도 가능하다 
+			let imgObj=document.createElement("img");
+			img.setAttribute("id", "profileImage");
+			img.setAttribute("src", data.imagePath);
+			
+			document.querySelector("#profileLink").innerText="";
+			document.querySelector("#profileLink").append(imgObj);
+			*/
+			
 			// input name="profile" 요소의 value 값으로 이미지 경로 넣어주기
 			document.querySelector("input[name=profile]").value=data.imagePath;
 		});
