@@ -5,8 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>/test_el/test01.jsp</title>
+<script>
+	let isGreater = \${10>1};
+	let isGreater = true;
+	let myName = "${false ? 'kim': 'lee'}";
+	let myName = "lee";
+	
+</script>
 </head>
-<body>
+<body> 
 	<h1>Expression Language (EL)</h1>
 	<p>jsp 페이지에서 특별하게 해석되는 코드 블럭</p>
 	<p>EL 영역은 &#36;{ } 로 만들수 있습니다.</p>
